@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Header from "./components/Header";
+import Admin from "./components/Admin";
+import Cards from "./components/Cards";
+import ManageRecipe from "./components/ManageRecipe";
+import { Provider as RecipeProvider } from "./context/RecipeContext";
+// CSS
+import "./App.css";
 
-function App() {
+const App = props => {
+  const [pseudo, setPseudo] = useState(props.match.params.pseudo);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="box">
+      <RecipeProvider>
+        <Header pseudo={pseudo} />
+        <Cards pseudo={pseudo} />
+        <ManageRecipe/>
+        <Admin />
+      </RecipeProvider>
     </div>
   );
-}
+};
 
 export default App;

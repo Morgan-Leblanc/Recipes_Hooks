@@ -1,44 +1,41 @@
-import React from 'react'
-import { Redirect } from 'react-router-dom'
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 
-class Connexion extends React.Component {
-  state = {
-    pseudo: '',
-    goToApp: false
+const Connexion = () => {
+  const [pseudo, setPseudo] = useState("");
+  const [goToApp, setGoToApp] = useState(false);
+
+  const startApp = event => {
+    event.preventDefault();
+    setGoToApp(true);
+  };
+
+  const handleChange = event => {
+    const pseudo = event.target.value;
+    setPseudo(pseudo);
+  };
+
+  if (goToApp) {
+    return <Redirect push to={`/pseudo/${pseudo}`} />;
   }
 
-  goToApp = event => {
-    event.preventDefault()
-    this.setState({ goToApp: true })
-  }
+  return (
+    <div className="connexionBox">
+      <form className="connexion" onSubmit={startApp}>
+        <h1>Ma Boîte à Recettes</h1>
+        <input
+          type="text"
+          value={pseudo}
+          onChange={handleChange}
+          placeholder="Nom du Chef"
+          pattern="[A-Za-z-]{1,}"
+          required
+        />
+        <button type="submit">GO</button>
+        <p>Pas de caractères spéciaux.</p>
+      </form>
+    </div>
+  );
+};
 
-  handleChange = event => {
-    const pseudo = event.target.value
-    this.setState({ pseudo })
-  }
-
-  render () {
-    if (this.state.goToApp) {
-      return <Redirect push to={`/pseudo/${this.state.pseudo}`} />
-    }
-
-    return (
-      <div className='connexionBox'>
-        <form className='connexion' onSubmit={this.goToApp} >
-          <h1>Ma Boîte à Recettes</h1>
-          <input
-            type='text'
-            value={this.state.pseudo}
-            onChange={this.handleChange}
-            placeholder='Nom du Chef'
-            pattern='[A-Za-z-]{1,}'
-            required />
-          <button type='submit'>GO</button>
-          <p>Pas de caractères spéciaux.</p>
-        </form>
-      </div>
-    )
-  }
-}
-
-export default Connexion
+export default Connexion;
