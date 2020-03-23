@@ -8,7 +8,7 @@ const recipeReducer = (state, action) => {
     case "delete_recipe":
       return {...state,
         recipe: state.recipe.filter(
-          newrecipe => newrecipe.id !== action.payload
+          newRecipe => newRecipe.id !== action.payload
         )
       };
     case "update_recipe":
@@ -26,10 +26,10 @@ const recipeReducer = (state, action) => {
   }
 };
 
+
+
 const fetchRecipe = dispatch => recipe => {
   dispatch({ type: "fetch_recipe", payload: recipe });
-  console.log(recipe);
-  
 };
 const addRecipe = dispatch => recipe => {
   dispatch({ type: "add_recipe", payload: recipe });

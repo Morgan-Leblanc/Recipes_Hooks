@@ -5,7 +5,7 @@ import { Context as RecipeContext } from "../context/RecipeContext";
 
 const Cards = () => {
   const { fetchRecipe, reset } = useContext(RecipeContext);
-  const [fill, setFill] = useState(true);
+  const [fill, setFill] = useState(false);
 
   const fillState = async () => {
     setFill(!fill);
@@ -30,7 +30,7 @@ const Cards = () => {
       </div>
       <div>
         <footer>
-          <button onClick={fillState}>Remplir</button>
+          <button onClick={fillState}>Fill ! </button>
         </footer>
       </div>
     </div>

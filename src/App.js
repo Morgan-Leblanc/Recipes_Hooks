@@ -7,7 +7,7 @@ import { Provider as RecipeProvider } from "./context/RecipeContext";
 import "./App.css";
 
 const App = props => {
-  const [pseudo, setPseudo] = useState(props.match.params.pseudo);
+  const [pseudo] = useState(props.match.params.pseudo);
 
   return (
     <div className="box">

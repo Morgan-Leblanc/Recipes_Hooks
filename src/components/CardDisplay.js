@@ -27,7 +27,7 @@ const CardDisplay = () => {
                 <div className="image">
                   <img
                     src={requireImage(recipes.image)}
-                    alt={`image${recipes.nom}`}
+                    alt={`${recipes.nom}`}
                   />
                 </div>
                 <div className="recette">
@@ -35,7 +35,7 @@ const CardDisplay = () => {
                   <ul className="liste-ingredients">{recipes.ingredients}</ul>
                   <ol className="liste-instructions">{recipes.instructions}</ol>
                 </div>
-                <UpdateCards id={recipes.id} recipes={recipes} />
+                <UpdateCards  id={recipes.id} recipes={recipes} />
               </div>
             </div>
           );
@@ -43,6 +43,5 @@ const CardDisplay = () => {
     </div>
   );
 };
-
 
 export default CardDisplay;

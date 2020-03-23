@@ -49,7 +49,7 @@ const ManageRecipe = () => {
             rows="15"
             onChange={e => setInstructions(e.target.value)}
           ></textarea>
-          <button onClick={handleSubmit}>check</button>
+          <button onClick={handleSubmit}>Add Recipe</button>
         </form>
       </div>
     </div>

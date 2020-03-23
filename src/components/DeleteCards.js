@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import { Context as RecipeContext } from "../context/RecipeContext";
 
-const DeleteCards = ({id}) => {
-  const {
-    deleteRecipe
-  } = useContext(RecipeContext);
+const DeleteCards = ({ id }) => {
+  const { deleteRecipe } = useContext(RecipeContext);
 
   return (
     <div>
-      <button onClick={() => deleteRecipe(id)}>X</button>
+        <div className="admin-form">
+          <button onClick={() => deleteRecipe(id)}>X</button>
+        </div>
     </div>
   );
 };
