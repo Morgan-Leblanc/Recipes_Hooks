@@ -4,12 +4,8 @@ import CardDisplay from "../components/CardDisplay";
 import { Context as RecipeContext } from "../context/RecipeContext";
 
 const Cards = () => {
-  const {
-    state: { recipe },
-    addRecipe,
-    reset
-  } = useContext(RecipeContext);
-  const [fill, setFill] = useState(false);
+  const { fetchRecipe, reset } = useContext(RecipeContext);
+  const [fill, setFill] = useState(true);
 
   const fillState = async () => {
     setFill(!fill);
@@ -17,14 +13,16 @@ const Cards = () => {
 
   useEffect(() => {
     if (fill) {
-      addRecipe(Object.values(data));
+      fetchRecipe(Object.values(data));
     }
     if (fill === false) {
       reset();
+    } else{
+
     }
   }, [fill]);
   
-  console.log(recipe);
+  
   return (
     <div>
       <div>

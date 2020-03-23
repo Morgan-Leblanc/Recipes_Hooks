@@ -1,17 +1,13 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Context as RecipeContext } from "../context/RecipeContext";
+import UpdateCards from "./UpdateCards";
+
 
 const CardDisplay = () => {
   const {
     state: { recipe }
   } = useContext(RecipeContext);
-  // const ingrédients = recipes.ingredients
-  //   .split(",")
-  //   .map(item => <li key={item}>{item}</li>);
-
-  // const instructions = recipes.instructions
-  //   .split("\n")
-  //   .map(item => <li key={item}>{item}</li>);
+  console.log(recipe);
 
   const requireImage = path => {
     try {
@@ -21,12 +17,10 @@ const CardDisplay = () => {
     }
   };
 
-  console.log(recipe);
-
   return (
     <div>
       {recipe &&
-        recipe.map((recipes,index) => {
+        recipe.map(recipes => {
           return (
             <div className="cards">
               <div className="card">
@@ -41,6 +35,7 @@ const CardDisplay = () => {
                   <ul className="liste-ingredients">{recipes.ingredients}</ul>
                   <ol className="liste-instructions">{recipes.instructions}</ol>
                 </div>
+                <UpdateCards id={recipes.id} recipes={recipes} />
               </div>
             </div>
           );
@@ -48,5 +43,6 @@ const CardDisplay = () => {
     </div>
   );
 };
+
 
 export default CardDisplay;

@@ -1,14 +1,24 @@
 import createDataContext from "./createDataContext";
 const recipeReducer = (state, action) => {
   switch (action.type) {
-    case "fetch_data":
-      return state;
     case "add_recipe":
+      return { ...state, recipe: [...state.recipe, action.payload] };
+    case "fetch_recipe":
       return { ...state, recipe: action.payload };
     case "delete_recipe":
-      return { ...state, recipe: [...state.recipe, action.payload] };
+      return {...state,
+        recipe: state.recipe.filter(
+          newrecipe => newrecipe.id !== action.payload
+        )
+      };
     case "update_recipe":
-      return null;
+      return {
+        recipe: state.recipe.map(newRecipe => {
+          return newRecipe.id === action.payload.id
+            ? action.payload
+            : newRecipe;
+        })
+      };
     case "reset_state":
       return { ...state, recipe: [] };
     default:
@@ -16,16 +26,29 @@ const recipeReducer = (state, action) => {
   }
 };
 
+const fetchRecipe = dispatch => recipe => {
+  dispatch({ type: "fetch_recipe", payload: recipe });
+  console.log(recipe);
+  
+};
+const addRecipe = dispatch => recipe => {
+  dispatch({ type: "add_recipe", payload: recipe });
+};
 
-const addRecipe = dispatch => async recipe => {
- await dispatch({ type: "add_recipe", payload: recipe });
+const deleteRecipe = dispatch => {
+  return id => {
+    dispatch({ type: "delete_recipe", payload: id });
+  };
 };
-const deleteRecipe = dispatch => recipe => {
-  dispatch({ type: "delete_recipe", payload: recipe });
+
+const updateRecipe = dispatch => {
+  return (id, nom, image, ingredients, instructions) =>
+    dispatch({
+      type: "update_recipe",
+      payload: { id, nom, image, ingredients, instructions }
+    });
 };
-const updateRecipe = dispatch => recipe => {
-  dispatch({ type: "update_recipe", payload: recipe });
-};
+
 const reset = dispatch => recipe => {
   dispatch({ type: "reset_state", payload: recipe });
 };
@@ -33,10 +56,11 @@ const reset = dispatch => recipe => {
 export const { Context, Provider } = createDataContext(
   recipeReducer,
   {
-    addRecipe,
+    fetchRecipe,
     deleteRecipe,
     updateRecipe,
+    addRecipe,
     reset
   },
-  { recipe:"" }
+  { recipe: [] }
 );

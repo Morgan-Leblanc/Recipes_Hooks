@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Header from "./components/Header";
-import Admin from "./components/Admin";
 import Cards from "./components/Cards";
 import ManageRecipe from "./components/ManageRecipe";
 import { Provider as RecipeProvider } from "./context/RecipeContext";
@@ -15,8 +14,7 @@ const App = props => {
       <RecipeProvider>
         <Header pseudo={pseudo} />
         <Cards pseudo={pseudo} />
-        <ManageRecipe/>
-        <Admin />
+        <ManageRecipe />
       </RecipeProvider>
     </div>
   );

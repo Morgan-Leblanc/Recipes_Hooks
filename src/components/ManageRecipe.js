@@ -2,29 +2,27 @@ import React, { useState, useContext } from "react";
 import { Context as RecipeContext } from "../context/RecipeContext";
 
 const ManageRecipe = () => {
-  const { state, setState } = useContext(RecipeContext);
+  const { addRecipe } = useContext(RecipeContext);
   const [nom, setNom] = useState("");
   const [image, setImage] = useState("");
-  const [ingrédients, setIngrédients] = useState("");
+  const [ingredients, setIngrédients] = useState("");
   const [instructions, setInstructions] = useState("");
 
-  console.log(state);
-  
-
- const  handleSubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault();
     const recipe = {
       nom,
       image,
-      ingrédients,
+      ingredients,
       instructions
     };
+    addRecipe(recipe);
   };
 
   return (
     <div>
       <div className="cards">
-        <form onSubmit={handleSubmit} className="admin-form ajouter-recette">
+        <form className="admin-form ajouter-recette">
           <input
             name="nom"
             value={nom}
@@ -39,7 +37,7 @@ const ManageRecipe = () => {
           ></input>
           <textarea
             name="ingrédient"
-            value={ingrédients}
+            value={ingredients}
             placeholder="Insérez des ingrédients"
             rows="3"
             onChange={e => setIngrédients(e.target.value)}
@@ -51,6 +49,7 @@ const ManageRecipe = () => {
             rows="15"
             onChange={e => setInstructions(e.target.value)}
           ></textarea>
+          <button onClick={handleSubmit}>check</button>
         </form>
       </div>
     </div>
